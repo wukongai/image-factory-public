@@ -1,0 +1,125 @@
+{
+  "id": "orange-promo-main-v1",
+  "name": "橙色活力转化·方形主图",
+  "description": "新品发布、课程招募、活动海报、促销（仅使用已确认优惠）",
+  "schema": "../schemas/template.schema.json",
+  "scene": "product_main",
+  "size": "1024x1024",
+  "aspect": "1:1",
+  "render_strategy": "image_brief_to_prompt",
+  "reference_strategy": {
+    "type": "primary_reference"
+  },
+  "prompt_role": "你是中文营销海报设计师,擅长把用户的卖点、受众痛点和 CTA 组织成可发布的竖版转化海报。",
+  "default_mood": "清晰、有行动感、可信",
+  "default_layout_pattern": "hook_headline_value_proof_benefits_cta",
+  "template_parameters": {
+    "conversion_priority": "主标题先抓住痛点或结果,中部主视觉解释价值,底部利益点和 CTA 促进行动。",
+    "text_density": "中低密度,最多主标题、副标题、3 个利益点、1 个 CTA。",
+    "trust_priority": "避免夸张承诺,用具体机制、边界或成果感建立可信度。",
+    "reference_strategy": "没有参考图时也能独立生成;如果传入 reference_analysis,只复用构图和层级规则。",
+    "style_family": "orange-promo",
+    "series_consistency": "本风格方形和竖版成套复用同一配色、产品外观、字形和图形语言；改变画幅时重新排版。"
+  },
+  "content_contract": {
+    "input_slots": [
+      "content.headline",
+      "content.subheadline",
+      "content.points[]",
+      "content.cta",
+      "content.brand",
+      "visual.subject"
+    ],
+    "copy_budget": {
+      "headline": "最多 16 个汉字或等效字符,必须一眼可读。",
+      "subheadline": "最多 28 个汉字,解释收益或适用对象。",
+      "points": "最多 3 条,每条 8-14 个汉字。",
+      "cta": "最多 12 个汉字。"
+    },
+    "forbidden": [
+      "虚假承诺",
+      "夸张收益数字",
+      "满屏小字",
+      "二维码或扫码文案"
+    ]
+  },
+  "layout": {
+    "headline": "上方30%为主标题和一句副标题。大号粗体，主标题占上部三分之一；一个核心收益可使用橙底白字标签，不擅自添加折扣数字。",
+    "visual": "中间45%保留主视觉。中部放一个清晰商品、课程交付物或抽象成果，搭配少量圆角色块和箭头形成向CTA的动线。",
+    "conversion": "底部25%放短卖点与CTA。底部最多三个利益点与宽阔 CTA；只有用户提供真实售价或优惠时才设计价格模块。"
+  },
+  "style": {
+    "visual_style": "明亮橙色与奶白块面构成的现代营销海报，大标题、大产品、清楚利益点，轻微贴纸层次与动势，热烈但不廉价。",
+    "texture": "以对应风格的材质和空间表现为准，不能默认套用暖纸手绘。",
+    "palette": [
+      {
+        "name": "活力橙",
+        "hex": "#FF6B24",
+        "usage": "主色块与行动区"
+      },
+      {
+        "name": "奶白",
+        "hex": "#FFF6E9",
+        "usage": "标题阅读区"
+      },
+      {
+        "name": "深棕",
+        "hex": "#2E1B13",
+        "usage": "高对比文字"
+      },
+      {
+        "name": "浅杏",
+        "hex": "#FFD5AA",
+        "usage": "辅助块面"
+      }
+    ],
+    "typography": {
+      "headline": "大号粗体，主标题占上部三分之一；一个核心收益可使用橙底白字标签，不擅自添加折扣数字。",
+      "subheadline": "次级标题简短清晰，与主标题至少形成两级字号差。",
+      "points": "最多三条短句，不抢主标题。",
+      "cta": "高对比、短而明确，只保留一个行动入口。"
+    }
+  },
+  "reference_policy": {
+    "reuse": [
+      "信息层级",
+      "标题区比例",
+      "主视觉和 CTA 的相对关系",
+      "留白节奏"
+    ],
+    "do_not_reuse": [
+      "参考图品牌",
+      "完整文案",
+      "logo",
+      "可识别人物或商品包装"
+    ]
+  },
+  "canvas": {
+    "safe_margin": "四周安全边距明显,标题距离边缘不少于画面宽度 8%。",
+    "white_space": "留白服务阅读路径,不要把所有卖点塞满。",
+    "overflow_control": "任何文字不得裁切、贴边或被主视觉遮挡。"
+  },
+  "quality_gates": [
+    "第一眼读清主标题和行动理由。",
+    "用户自己的主题、卖点、CTA 清楚。",
+    "底部利益点最多 3 个。",
+    "可信、不夸张,像可发布营销海报。",
+    "不能退回通用暖白蓝橙风格；必须明显呈现本模板指定视觉风格。"
+  ],
+  "copy_rules": [
+    "整张图只使用中文;必要技术词可保留英文缩写。",
+    "画面文字只来自 image_brief.content。",
+    "标题、副标题、利益点、CTA 四级层级必须清楚。",
+    "不要新增未经用户提供的价格、名额、倒计时或夸张数字。"
+  ],
+  "constraints": [
+    "画幅必须为1:1，重要信息不裁切。",
+    "主标题第一眼可读；同套素材使用本模板家族。",
+    "不新增未经确认的价格、折扣、权益、评价或资质。"
+  ],
+  "negative_prompt": "虚假承诺,夸张收益,价格捏造,倒计时捏造,二维码,扫码关注,私信领取,满屏小字,标题贴边,内容裁切,廉价模板,厚重阴影,过度渐变,四格表格,PPT目录页,随机拼贴,水印,logo仿冒,文字乱码,英文乱码,捏造原价、虚假折扣、虚假限量、伪倒计时、杂乱爆炸贴纸、过度促销口号",
+  "default_for_scene": false,
+  "aliases": [
+    "橙色活力转化主图"
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "id": "cyber-bold-poster-v1",
+  "name": "黑底赛博大字·竖版营销海报",
+  "description": "AI 工具、科技产品、效率课程、发布与招募",
+  "schema": "../schemas/template.schema.json",
+  "scene": "marketing_poster",
+  "size": "1024x1536",
+  "aspect": "2:3",
+  "render_strategy": "image_brief_to_prompt",
+  "reference_strategy": {
+    "type": "primary_reference"
+  },
+  "prompt_role": "你是中文营销海报设计师,擅长把用户的卖点、受众痛点和 CTA 组织成可发布的竖版转化海报。",
+  "default_mood": "清晰、有行动感、可信",
+  "default_layout_pattern": "hook_headline_value_proof_benefits_cta",
+  "template_parameters": {
+    "conversion_priority": "主标题先抓住痛点或结果,中部主视觉解释价值,底部利益点和 CTA 促进行动。",
+    "text_density": "中低密度,最多主标题、副标题、3 个利益点、1 个 CTA。",
+    "trust_priority": "避免夸张承诺,用具体机制、边界或成果感建立可信度。",
+    "reference_strategy": "没有参考图时也能独立生成;如果传入 reference_analysis,只复用构图和层级规则。",
+    "style_family": "cyber-bold",
+    "series_consistency": "本风格方形和竖版成套复用同一配色、产品外观、字形和图形语言；改变画幅时重新排版。"
+  },
+  "content_contract": {
+    "input_slots": [
+      "content.headline",
+      "content.subheadline",
+      "content.points[]",
+      "content.cta",
+      "content.brand",
+      "visual.subject"
+    ],
+    "copy_budget": {
+      "headline": "最多 16 个汉字或等效字符,必须一眼可读。",
+      "subheadline": "最多 28 个汉字,解释收益或适用对象。",
+      "points": "最多 3 条,每条 8-14 个汉字。",
+      "cta": "最多 12 个汉字。"
+    },
+    "forbidden": [
+      "虚假承诺",
+      "夸张收益数字",
+      "满屏小字",
+      "二维码或扫码文案"
+    ]
+  },
+  "layout": {
+    "headline": "顶部25%-32%为主标题和副标题，标题形成压倒性的视觉焦点。极粗中文黑体，紧凑但不挤压，最多两行；标题单独形成第一阅读层级。关键结果用电光青，不能用整段霓虹描边。",
+    "visual": "中部约45%为主视觉和证据表达。一件清晰的抽象科技装置或产品主视觉，冷色轮廓光；网格只作背景，不能画代码雨掩盖文案。",
+    "conversion": "下部约25%按卖点、CTA顺序收束。低密度卖点横条与一个高对比荧光 CTA；无价格时不生成价格区域。"
+  },
+  "style": {
+    "visual_style": "黑底赛博科技营销，极大中文无衬线粗标题，冷光边缘、精密网格与少量科技轨迹；标题比装饰更抢眼，绝不满屏代码。",
+    "texture": "以对应风格的材质和空间表现为准，不能默认套用暖纸手绘。",
+    "palette": [
+      {
+        "name": "近黑",
+        "hex": "#06080F",
+        "usage": "85%的深色背景"
+      },
+      {
+        "name": "冷白",
+        "hex": "#F4F8FF",
+        "usage": "超大标题"
+      },
+      {
+        "name": "电光青",
+        "hex": "#30E5FF",
+        "usage": "核心词与技术线"
+      },
+      {
+        "name": "荧光绿",
+        "hex": "#B5FF2B",
+        "usage": "一个行动重点"
+      }
+    ],
+    "typography": {
+      "headline": "极粗中文黑体，紧凑但不挤压，最多两行；标题单独形成第一阅读层级。关键结果用电光青，不能用整段霓虹描边。",
+      "subheadline": "次级标题简短清晰，与主标题至少形成两级字号差。",
+      "points": "最多三条短句，不抢主标题。",
+      "cta": "高对比、短而明确，只保留一个行动入口。"
+    }
+  },
+  "reference_policy": {
+    "reuse": [
+      "信息层级",
+      "标题区比例",
+      "主视觉和 CTA 的相对关系",
+      "留白节奏"
+    ],
+    "do_not_reuse": [
+      "参考图品牌",
+      "完整文案",
+      "logo",
+      "可识别人物或商品包装"
+    ]
+  },
+  "canvas": {
+    "safe_margin": "四周安全边距明显,标题距离边缘不少于画面宽度 8%。",
+    "white_space": "留白服务阅读路径,不要把所有卖点塞满。",
+    "overflow_control": "任何文字不得裁切、贴边或被主视觉遮挡。"
+  },
+  "quality_gates": [
+    "第一眼读清主标题和行动理由。",
+    "用户自己的主题、卖点、CTA 清楚。",
+    "底部利益点最多 3 个。",
+    "可信、不夸张,像可发布营销海报。",
+    "不能退回通用暖白蓝橙风格；必须明显呈现本模板指定视觉风格。"
+  ],
+  "copy_rules": [
+    "整张图只使用中文;必要技术词可保留英文缩写。",
+    "画面文字只来自 image_brief.content。",
+    "标题、副标题、利益点、CTA 四级层级必须清楚。",
+    "不要新增未经用户提供的价格、名额、倒计时或夸张数字。"
+  ],
+  "constraints": [
+    "画幅必须为2:3，重要信息不裁切。",
+    "主标题第一眼可读；同套素材使用本模板家族。",
+    "不新增未经确认的价格、折扣、权益、评价或资质。"
+  ],
+  "negative_prompt": "虚假承诺,夸张收益,价格捏造,倒计时捏造,二维码,扫码关注,私信领取,满屏小字,标题贴边,内容裁切,廉价模板,厚重阴影,过度渐变,四格表格,PPT目录页,随机拼贴,水印,logo仿冒,文字乱码,英文乱码,满屏细碎代码、荧光渐变正文、低对比灰字、复杂电路、假系统数据、密集发光文字",
+  "default_for_scene": false,
+  "aliases": [
+    "黑底赛博大字海报"
+  ]
+}

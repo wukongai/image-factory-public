@@ -9,4 +9,4 @@ Tech Stack: Python 3.10+, Pillow, Agent Skills。
 - [x] tests/test_public.py 覆盖模板、批量、参考、尺寸和状态；scripts/check_public_release.py 检查私有标记与敏感文件。
 - [x] 隔离安装副本验证，原版相同输入对比，不丢海报规则。
 - [x] 真实生成方图与详情，视觉检查后交给小店 HTML 清单。
-- [ ] 发布新 GitHub 仓库，更新双方安装链接与手册，远端安装复验。
+- [x] 发布新 GitHub 仓库，更新双方安装链接与手册，远端安装复验。

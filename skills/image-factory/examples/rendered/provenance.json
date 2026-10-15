@@ -18,5 +18,15 @@
     "sha256": "00a493961e3d30190956ee2a567bf9dfae187c66f9e55a1dd9df6f78b9b4c647",
     "source": "host image generation, generic demonstration",
     "visual_review": "passed"
+  },
+  {
+    "file": "cyber-bold-poster.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "sha256": "0f7c6738ee1a82cac1439d643442c90ddb98c7f65e1975ad85fbd6cd7aa269e3",
+    "source": "host image generation, generic cyber marketing example",
+    "visual_review": "passed"
   }
 ]

@@ -57,6 +57,14 @@ class PublicTests(unittest.TestCase):
   p=subprocess.run([sys.executable,str(ROOT/'scripts/generate_image_batch.py'),'--batch',str(ROOT/'examples/product-set.json'),'--output-dir',str(self.out/'batch')],capture_output=True,text=True)
   self.assertEqual(p.returncode,0,p.stdout+p.stderr)
   self.assertEqual(len(list((self.out/'batch').rglob('image-asset-manifest.json'))),2)
+ def test_marketing_style_pairs(self):
+  for style in ['cyber-bold','type-impact','orange-promo','cream-premium']:
+   for form,size in [('main','1024x1024'),('poster','1024x1536')]:
+    m=json.loads(self.compile(style+'-'+form+'-v1').read_text())
+    self.assertEqual(m['size'],size)
+    prompt=Path(m['render_handoff']['prompt_file']).read_text()
+    self.assertIn('需求实操课',prompt)
+    self.assertGreater(len(prompt),1000)
  def test_public_scan(self):
   p=subprocess.run([sys.executable,str(ROOT/'scripts/check_public_release.py')],capture_output=True,text=True)
   self.assertEqual(p.returncode,0,p.stdout+p.stderr)

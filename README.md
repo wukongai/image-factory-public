@@ -33,6 +33,12 @@ npx skills add wukongai/image-factory-public --skill image-factory
 - [验证说明](skills/image-factory/docs/VERIFICATION.md)
 - [隐私与安全](SECURITY.md)
 
+## 新增营销风格
+
+四套营销风格各配方形主图和竖版海报：**黑底赛博大字、黑白大字冲击、橙色活力转化、奶油质感高级**。每套分别定义标题层级、主视觉和转化区域，共 8 个新增模板，加上原有模板合计 12 个。
+
+[查看风格和模板选择表](skills/image-factory/docs/营销模板选择.md)。直接告诉 Agent “用黑底赛博大字风做一套商品图”即可。
+
 ## 包含什么
 
 | 模板 | 默认画幅 | 用途 |
@@ -62,3 +68,7 @@ MIT License。通用编译模块继承自 Image Factory，商品海报发行版�
 ![方形商品主图](skills/image-factory/examples/rendered/product-main.png)
 
 ![竖版详情图](skills/image-factory/examples/rendered/product-detail.png)
+
+### 黑底赛博大字示例
+
+![赛博营销海报](skills/image-factory/examples/rendered/cyber-bold-poster.png)
