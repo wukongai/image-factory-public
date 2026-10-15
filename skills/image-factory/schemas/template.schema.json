@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://content-factory.local/schemas/image-template.schema.json",
+  "title": "Image Factory Template",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "scene",
+    "size",
+    "render_strategy"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "scene": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "aspect": {
+      "type": "string"
+    },
+    "render_strategy": {
+      "type": "string"
+    },
+    "reference_strategy": {
+      "description": "Default business reference selection strategy. A brief may explicitly override it.",
+      "oneOf": [
+        {
+          "enum": ["primary_reference", "native_multi_reference", "reference_board", "candidate_handoffs"]
+        },
+        {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "enum": ["primary_reference", "native_multi_reference", "reference_board", "candidate_handoffs"]
+            },
+            "purpose_order": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"enum": ["identity", "style", "composition", "content"]}
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "default_for_scene": {
+      "type": "boolean"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prompt_role": {
+      "type": "string"
+    },
+    "template_parameters": {
+      "type": "object"
+    },
+    "content_contract": {
+      "type": "object"
+    },
+    "layout": {
+      "type": "object"
+    },
+    "style": {
+      "type": "object"
+    },
+    "reference_policy": {
+      "type": "object"
+    },
+    "canvas": {
+      "type": "object"
+    },
+    "quality_gates": {
+      "type": "array"
+    },
+    "quality_gates_v2": {
+      "type": "array"
+    },
+    "stability_protocol": {
+      "type": "object"
+    },
+    "post_components": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/post_component"
+      }
+    },
+    "copy_rules": {
+      "type": "array"
+    },
+    "constraints": {
+      "type": "array"
+    },
+    "negative_prompt": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "box_px": {
+      "type": "object",
+      "required": ["x", "y", "w", "h"],
+      "additionalProperties": false,
+      "properties": {
+        "x": {"type": "integer", "minimum": 0},
+        "y": {"type": "integer", "minimum": 0},
+        "w": {"type": "integer", "exclusiveMinimum": 0},
+        "h": {"type": "integer", "exclusiveMinimum": 0}
+      }
+    },
+    "post_component": {
+      "type": "object",
+      "required": ["id", "type", "component_box_px", "replace_box_px"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {"type": "string"},
+        "type": {"type": "string"},
+        "prompt_exposure": {"enum": ["safe_zone_only", "none"]},
+        "prompt_safe_zone": {"type": "object"},
+        "component_box_px": {"$ref": "#/$defs/box_px"},
+        "replace_box_px": {"$ref": "#/$defs/box_px"},
+        "label_box_px": {"$ref": "#/$defs/box_px"},
+        "clean_box_px": {"$ref": "#/$defs/box_px"},
+        "label_text": {"type": "string"},
+        "footer_alignment": {"type": "object"},
+        "visual_weight": {"type": "string"}
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+.env*
+!.env.example
+outputs/
+.local/
+.skill-engineering/
+*.egg-info/
+.DS_Store

@@ -1,0 +1,11 @@
+name: image-factory
+version: 0.1.0
+inputs: [confirmed_product_facts, image_tasks, authorized_assets, output_directory]
+outputs: [brief, prompt, render_handoff, image, delivery_receipt]
+state: [compiled, awaiting_render, awaiting_visual_review, ready, blocked]
+delegates: [host_image_tool, user_configured_image_tool, store-listing-kit]
+forbidden: [bundled_credentials, personal_identity_defaults, automatic_listing, false_render_success]
+stops: [missing_product_facts, missing_render_tool, invalid_image, conflicting_existing_file]
+approvals: [paid_generation, externally_published_content]
+scripts: [scripts/generate_image_asset.py, scripts/generate_image_batch.py, scripts/accept_image.py]
+tests: [tests/test_public.py]

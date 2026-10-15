@@ -1,0 +1,128 @@
+{
+  "id": "product-detail-v1",
+  "name": "竖版商品详情图",
+  "description": "竖版商品详情图，使用已确认的产品资料和统一品牌规范。",
+  "schema": "../schemas/template.schema.json",
+  "scene": "product_detail",
+  "size": "1024x1536",
+  "aspect": "2:3",
+  "render_strategy": "image_brief_to_prompt",
+  "reference_strategy": {
+    "type": "primary_reference"
+  },
+  "prompt_role": "你是中文营销海报设计师,擅长把用户的卖点、受众痛点和 CTA 组织成可发布的竖版转化海报。",
+  "default_mood": "清晰、有行动感、可信",
+  "default_layout_pattern": "hook_headline_value_proof_benefits_cta",
+  "template_parameters": {
+    "conversion_priority": "主标题先抓住痛点或结果,中部主视觉解释价值,底部利益点和 CTA 促进行动。",
+    "text_density": "中低密度,最多主标题、副标题、3 个利益点、1 个 CTA。",
+    "trust_priority": "避免夸张承诺,用具体机制、边界或成果感建立可信度。",
+    "reference_strategy": "没有参考图时也能独立生成;如果传入 reference_analysis,只复用构图和层级规则。"
+  },
+  "content_contract": {
+    "input_slots": [
+      "content.headline",
+      "content.subheadline",
+      "content.points[]",
+      "content.cta",
+      "content.brand",
+      "visual.subject"
+    ],
+    "copy_budget": {
+      "headline": "最多 16 个汉字或等效字符,必须一眼可读。",
+      "subheadline": "最多 28 个汉字,解释收益或适用对象。",
+      "points": "最多 3 条,每条 8-14 个汉字。",
+      "cta": "最多 12 个汉字。"
+    },
+    "forbidden": [
+      "虚假承诺",
+      "夸张收益数字",
+      "满屏小字",
+      "二维码或扫码文案"
+    ]
+  },
+  "layout": {
+    "top": "顶部 24%-30% 是强标题区,主标题最大,副标题说明收益或适用人群。",
+    "middle": "中部 42%-50% 放主视觉,用一个清楚隐喻承载产品或活动价值。",
+    "proof_strip": "主视觉下方可放一条轻证明带,用图标或短词表达机制、案例、流程等可信信息。",
+    "bottom": "底部 18%-24% 放 2-3 个利益点和一个清楚 CTA,不要塞成长段说明。"
+  },
+  "style": {
+    "visual_style": "现代中文营销海报,干净、专业、有转化意图但不油腻。",
+    "texture": "轻纸感、柔和块面、少量手绘标注或信息图图层。",
+    "palette": [
+      {
+        "name": "暖白",
+        "hex": "#F7F2E8",
+        "usage": "背景和留白"
+      },
+      {
+        "name": "炭黑",
+        "hex": "#1E1E1E",
+        "usage": "主标题和正文"
+      },
+      {
+        "name": "信号蓝",
+        "hex": "#2F6FED",
+        "usage": "CTA 和科技感强调"
+      },
+      {
+        "name": "能量橙",
+        "hex": "#F28C38",
+        "usage": "利益点和行动提示"
+      },
+      {
+        "name": "鼠尾草绿",
+        "hex": "#7C9473",
+        "usage": "稳定感和辅助信息"
+      }
+    ],
+    "typography": {
+      "headline": "超大中文标题,高对比,不可贴边。",
+      "subheadline": "中号中文,行距舒展。",
+      "points": "短句配小图标或标签。",
+      "cta": "清楚但克制,可做小按钮或贴纸感。"
+    }
+  },
+  "reference_policy": {
+    "reuse": [
+      "信息层级",
+      "标题区比例",
+      "主视觉和 CTA 的相对关系",
+      "留白节奏"
+    ],
+    "do_not_reuse": [
+      "参考图品牌",
+      "完整文案",
+      "logo",
+      "可识别人物或商品包装"
+    ]
+  },
+  "canvas": {
+    "safe_margin": "四周安全边距明显,标题距离边缘不少于画面宽度 8%。",
+    "white_space": "留白服务阅读路径,不要把所有卖点塞满。",
+    "overflow_control": "任何文字不得裁切、贴边或被主视觉遮挡。"
+  },
+  "quality_gates": [
+    "第一眼读清主标题和行动理由。",
+    "用户自己的主题、卖点、CTA 清楚。",
+    "底部利益点最多 3 个。",
+    "可信、不夸张,像可发布营销海报。"
+  ],
+  "copy_rules": [
+    "整张图只使用中文;必要技术词可保留英文缩写。",
+    "画面文字只来自 image_brief.content。",
+    "标题、副标题、利益点、CTA 四级层级必须清楚。",
+    "不要新增未经用户提供的价格、名额、倒计时或夸张数字。"
+  ],
+  "constraints": [
+    "必须遵守 2:3 画幅。",
+    "突出一个核心卖点，标题、主视觉、说明清晰。",
+    "全套统一配色、字体气质、留白与产品外观；不得添加未确认事实。"
+  ],
+  "negative_prompt": "虚假承诺,夸张收益,价格捏造,倒计时捏造,二维码,扫码关注,私信领取,满屏小字,标题贴边,内容裁切,廉价模板,厚重阴影,过度渐变,四格表格,PPT目录页,随机拼贴,水印,logo仿冒,文字乱码,英文乱码",
+  "default_for_scene": true,
+  "aliases": [
+    "竖版商品详情图"
+  ]
+}

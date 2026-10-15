@@ -1,0 +1,130 @@
+{
+  "id": "poster-reference-remix-v1",
+  "name": "参考海报结构改写模板",
+  "description": "把一张参考海报的可迁移结构、层级、节奏和风格关系拆出来,替换成用户自己的主题、文案、受众和 CTA。强调借鉴而非复刻。",
+  "schema": "../schemas/template.schema.json",
+  "scene": "poster",
+  "size": "1024x1536",
+  "aspect": "9:16",
+  "render_strategy": "image_brief_to_prompt",
+  "reference_strategy": {"type": "native_multi_reference"},
+  "prompt_role": "你是资深中文营销海报视觉设计师,擅长把参考图拆成可复用的构图规则,再为用户自己的主题生成新海报。",
+  "default_mood": "专业、清晰、有行动感",
+  "default_layout_pattern": "top_headline_center_hero_bottom_benefits_cta",
+  "template_parameters": {
+    "stability_level": "P0 prompt 模板稳定版;先复用结构,不做像素级复刻。",
+    "reference_strategy": "参考图只作为结构分析来源,最终内容必须来自 image_brief。",
+    "text_density": "低到中密度,画面文字只保留标题、副标题、3 个利益点和 CTA。",
+    "conversion_priority": "主标题先抓注意力,主视觉解释价值,底部 CTA 给行动入口。"
+  },
+  "content_contract": {
+    "input_slots": [
+      "content.headline",
+      "content.subheadline",
+      "content.points[]",
+      "content.cta",
+      "visual.subject",
+      "reference_analysis.layout_prompt",
+      "reference_analysis.style_prompt"
+    ],
+    "copy_budget": {
+      "headline": "最多 16 个汉字或等效字符,必须一眼可读。",
+      "subheadline": "最多 28 个汉字,解释结果或收益。",
+      "points": "最多 3 条,每条 8-14 个汉字。",
+      "cta": "最多 12 个汉字。"
+    },
+    "forbidden": [
+      "复刻参考图品牌名",
+      "复刻参考图 logo",
+      "照搬参考图完整标题",
+      "使用可识别专有人物或 IP",
+      "用过多小字堆满底部"
+    ]
+  },
+  "layout": {
+    "top": "顶部 22%-28% 是强标题区:主标题最大、对比强、留白足;副标题在主标题下方一行,不要超过两行。",
+    "middle": "中部 48%-55% 是主视觉:用一个清晰隐喻解释用户主题,可以结合拆解图层、发光画布、模板积木、流程卡片等元素。",
+    "bottom": "底部 18%-24% 放 2-3 个利益点和 CTA。利益点可以是短横条、轻便签或图标标注,CTA 必须小而清楚。",
+    "flow": "视线从标题进入主视觉,再落到底部行动区。不要把要点平均铺成表格。"
+  },
+  "style": {
+    "visual_style": "现代中文营销海报,信息设计感强,干净、有势能、不廉价。允许少量手绘或图层隐喻,但整体应像专业内容品牌视觉。",
+    "texture": "干净纸张或轻微颗粒质感;避免过度 3D、廉价模板、厚重阴影。",
+    "palette": [
+      {
+        "name": "炭黑",
+        "hex": "#1E1E1E",
+        "usage": "主标题和关键轮廓"
+      },
+      {
+        "name": "暖白",
+        "hex": "#F7F2E8",
+        "usage": "背景和留白"
+      },
+      {
+        "name": "信号蓝",
+        "hex": "#2F6FED",
+        "usage": "CTA、连接线和科技感强调"
+      },
+      {
+        "name": "能量橙",
+        "hex": "#F28C38",
+        "usage": "利益点或局部高亮"
+      },
+      {
+        "name": "鼠尾草绿",
+        "hex": "#7C9473",
+        "usage": "次级块和稳定感"
+      }
+    ],
+    "typography": {
+      "headline": "超大中文标题,高对比,不可贴边。",
+      "subheadline": "中号中文,行距舒展。",
+      "points": "短句,宁可少字,不要小字解释。",
+      "cta": "按钮或贴纸感,但不要像网页按钮截图。"
+    }
+  },
+  "reference_policy": {
+    "reuse": [
+      "信息层级",
+      "标题区比例",
+      "主视觉与文案的相对关系",
+      "留白节奏",
+      "色彩对比逻辑"
+    ],
+    "do_not_reuse": [
+      "品牌、logo、商标",
+      "完整文案",
+      "受保护 IP 或专有人物",
+      "可识别商品包装",
+      "原图具体排版像素位置"
+    ],
+    "adaptation_rule": "像专业设计师做同类策略的新稿,不是生成参考图的变体。"
+  },
+  "canvas": {
+    "safe_margin": "四周安全边距明显;标题距离边缘不少于画面宽度 8%。",
+    "white_space": "留白要服务阅读路径;不要把所有元素塞满。",
+    "overflow_control": "任何文字不得裁切、变形、贴边或被主视觉遮挡。"
+  },
+  "quality_gates": [
+    "第一眼能读清主标题。",
+    "用户自己的主题和 CTA 必须替代参考图内容。",
+    "参考图只体现在构图策略和风格关系,不能出现原品牌或原文案。",
+    "底部利益点最多 3 个,每个短而清楚。",
+    "整体像可发布海报,不是 prompt 草稿或拼贴板。"
+  ],
+  "copy_rules": [
+    "整张图只使用中文;必要技术词可保留英文缩写。",
+    "画面文字只来自 image_brief.content。",
+    "标题、副标题、利益点、CTA 四级层级必须清楚。",
+    "如果文字渲染风险高,优先保留标题和 CTA,减少利益点正文。"
+  ],
+  "constraints": [
+    "必须有标题区、主视觉区、行动区三段。",
+    "必须体现参考图分析里的可迁移规则。",
+    "不得抄袭参考图品牌、文案或专有视觉资产。",
+    "不得做成四格表格、PPT 目录页或满屏小字。"
+  ],
+  "negative_prompt": "参考图原品牌,logo,商标,完整照搬文案,明星肖像,受保护IP,可识别商品包装,文字乱码,英文乱码,小字过多,标题贴边,内容裁切,廉价模板,厚重阴影,过度渐变,四格表格,PPT目录页,随机拼贴,水印",
+  "default_for_scene": true
+}

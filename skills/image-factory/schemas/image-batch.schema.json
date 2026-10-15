@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://content-factory.local/schemas/image-batch.schema.json",
+  "title": "Image Batch Manifest",
+  "description": "一组图像业务任务的批量编译 manifest。每个 item 的字段与 compile-only CLI 参数一一对应，并统一产出 image-render-handoff/v1。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "image-batch/v1"
+    },
+    "id": {
+      "type": "string",
+      "description": "批次 id,用于输出目录命名"
+    },
+    "defaults": {
+      "$ref": "#/$defs/item",
+      "description": "所有 item 的公共默认值"
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/item"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "item": {
+      "type": "object",
+      "properties": {
+        "brief": {
+          "type": "string",
+          "description": "image_brief 或 card_brief JSON 路径,相对本文件目录解析"
+        },
+        "template": {
+          "type": "string"
+        },
+        "content_file": {
+          "type": "string",
+          "description": "原文路径,相对本文件目录解析"
+        },
+        "reference_analysis": {
+          "type": "string",
+          "description": "参考图分析文件路径,相对本文件目录解析"
+        },
+        "reference_image": {
+          "type": "string"
+        },
+        "scene": {
+          "type": "string"
+        },
+        "goal": {
+          "type": "string"
+        },
+        "audience": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "canvas_preset": {
+          "type": "string"
+        },
+        "adaptive_layout": {
+          "type": "boolean"
+        },
+        "layout_mode": {
+          "enum": ["auto", "stacked", "split-left", "banner"]
+        },
+        "layout_profile": {
+          "enum": ["safe-split", "integrated-negative-space", "integrated-scene"]
+        },
+        "delivery_mode": {
+          "enum": ["direct-integrated", "two-step-publish"],
+          "description": "Explicit IP article delivery choice; no channel-derived default."
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "cta": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "visual_subject": {
+          "type": "string"
+        },
+        "mood": {
+          "type": "string"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "set": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "模板覆盖,dot.path=value 形式"
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_max_chars": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

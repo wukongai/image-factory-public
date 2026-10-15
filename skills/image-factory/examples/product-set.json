@@ -1,0 +1,37 @@
+{
+  "schema_version": "image-batch/v1",
+  "id": "product-demo",
+  "defaults": {
+    "scene": "marketing_poster",
+    "brand": "学习工作室",
+    "set": [
+      "style.visual_style=暖白背景、深蓝文字、橙色点缀、简洁编辑设计；整套保持统一"
+    ]
+  },
+  "items": [
+    {
+      "id": "01-main",
+      "template": "product-main-v1",
+      "title": "产品需求实操课",
+      "subtitle": "把想法整理成清楚的需求",
+      "points": [
+        "明确目标用户",
+        "梳理产品价值",
+        "形成需求文档"
+      ],
+      "cta": "查看课程内容"
+    },
+    {
+      "id": "02-detail",
+      "template": "product-detail-v1",
+      "title": "三步梳理产品需求",
+      "subtitle": "从问题到可讨论的方案",
+      "points": [
+        "了解谁在遇到问题",
+        "说明产品带来的改变",
+        "整理成一份需求文档"
+      ],
+      "cta": "了解学习内容"
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://content-factory.local/schemas/image-brief.schema.json",
+  "title": "Image Asset Brief",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "scene",
+    "content"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "image-asset-brief/v1"
+    },
+    "id": {
+      "type": "string"
+    },
+    "scene": {
+      "type": "string"
+    },
+    "goal": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "string"
+    },
+    "delivery_mode": {
+      "enum": ["direct-integrated", "two-step-publish"],
+      "description": "Orthogonal delivery choice: one-pass IP illustration with short visual text, or two-step raw image plus publish layout. Never inferred from channel, style, canvas, or layout."
+    },
+    "selection_receipt": {
+      "type": "object",
+      "description": "Natural-language choice confirmation required before IP article compilation. Delivery/text strategy, canvas, and render style are independent required choices.",
+      "required": ["status", "source"],
+      "properties": {
+        "status": {"const": "confirmed"},
+        "source": {"enum": ["user-explicit", "user-accepted-recommendation"]},
+        "delivery_mode": {"type": "string"},
+        "canvas": {"type": "string"},
+        "template_id": {"type": "string"},
+        "style_variant_id": {
+          "enum": [
+            "minimal-lineart",
+            "playful-craft",
+            "sticker-collage",
+            "expressive-handdrawn",
+            "pop-impact",
+            "art-print"
+          ]
+        },
+        "publish_extension_id": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "source": {
+      "type": "object"
+    },
+    "content": {
+      "type": "object",
+      "required": [
+        "headline"
+      ],
+      "properties": {
+        "headline": {
+          "type": "string"
+        },
+        "subheadline": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cta": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        }
+      }
+    },
+    "visual": {
+      "type": "object",
+      "properties": {
+        "authorized_assets": {
+          "type": "array",
+          "description": "Authorized business assets without image API semantics.",
+          "items": {"$ref": "#/$defs/authorizedAsset"}
+        },
+        "reference_strategy": {
+          "description": "Business-owned selection strategy for the authorized assets used by this render.",
+          "oneOf": [
+            {"$ref": "#/$defs/referenceStrategyType"},
+            {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": {"$ref": "#/$defs/referenceStrategyType"},
+                "primary_asset": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Authorized asset id or absolute path selected as the primary reference."
+                },
+                "purpose_order": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {"enum": ["identity", "style", "composition", "content"]}
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "style_variant_id": {
+          "enum": [
+            "minimal-lineart",
+            "playful-craft",
+            "sticker-collage",
+            "expressive-handdrawn",
+            "pop-impact",
+            "art-print"
+          ],
+          "description": "Orthogonal IP render style. It never selects scene, delivery mode, canvas, layout, or identity."
+        }
+      },
+      "additionalProperties": true
+    },
+    "composition": {
+      "type": "object",
+      "properties": {
+        "canvas_preset": {
+          "type": "string",
+          "description": "Selectable canvas preset id or alias, for example square_1_1, 3:4, 9:16, 16:9, or wechat_cover_2_35_1."
+        },
+        "size": {
+          "type": "string",
+          "pattern": "^[0-9]+[xX×][0-9]+$",
+          "description": "Custom width x height. Mutually exclusive with canvas_preset."
+        },
+        "publish_extension": {
+          "type": "string",
+          "description": "User-confirmed image-publish-layout extension id for two-step-publish; never inferred from IP render style."
+        },
+        "publish_preset": {
+          "enum": ["portrait_3_4", "vertical_9_16", "square_1_1", "custom"],
+          "description": "User-confirmed final canvas preset for two-step-publish; independent from the raw image canvas."
+        },
+        "adaptive_layout": {
+          "type": "boolean",
+          "description": "Use deterministic non-overlapping image/text layout."
+        },
+        "layout_mode": {
+          "enum": ["auto", "stacked", "split-left", "banner"]
+        },
+        "layout_profile": {
+          "enum": ["safe-split", "integrated-negative-space", "integrated-scene"],
+          "description": "Orthogonal deterministic image/text relationship. Defaults to safe-split."
+        },
+        "text_presentation": {
+          "enum": ["annotation-light", "editorial-prominent", "subtitle-safe"],
+          "description": "Image-factory-owned text prominence policy; it is independent from IP style and canvas."
+        },
+        "character_performance": {
+          "$ref": "#/$defs/characterPerformance"
+        },
+        "layout_contract": {
+          "type": "object",
+          "description": "Compiler-generated adaptive-mixed-layout/v1 plan."
+        }
+      },
+      "additionalProperties": true
+    },
+    "reference_analysis": {
+      "type": "object"
+    },
+    "source_content": {
+      "type": "string"
+    },
+    "director_context": {
+      "type": "object",
+      "description": "Optional series context for deterministic Image-factory shot rotation; it contains no visual decisions.",
+      "properties": {
+        "sequence_index": {"type": "integer", "minimum": 0},
+        "sequence_size": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "director": {
+      "type": "object",
+      "description": "Image-factory-owned ip-director-plan/v1 output.",
+      "properties": {
+        "schema_version": {"const": "ip-director-plan/v1"},
+        "owner": {"const": "image-factory"},
+        "composition": {"type": "object"},
+        "visual": {"type": "object"}
+      },
+      "additionalProperties": true
+    },
+    "post_assets": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "qr_image_path": {
+          "type": "string"
+        }
+      }
+    },
+    "post_components": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"scene": {"const": "ip_article_illustration"}},
+        "required": ["scene"]
+      },
+      "then": {"required": ["delivery_mode"]}
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "authorizedAsset": {
+      "type": "object",
+      "required": ["path", "purpose"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "purpose": {
+          "type": "string",
+          "enum": ["identity", "style", "composition", "content"]
+        },
+        "ownership": {"type": "string", "minLength": 1},
+        "required": {
+          "type": "boolean",
+          "description": "Whether the selected asset must be attached. Omitted assets are never attached regardless of this value."
+        }
+      },
+      "additionalProperties": false
+    },
+    "referenceStrategyType": {
+      "enum": [
+        "primary_reference",
+        "native_multi_reference",
+        "reference_board",
+        "candidate_handoffs"
+      ]
+    },
+    "characterPerformance": {
+      "type": "object",
+      "properties": {
+        "expression_preset": {
+          "enum": ["calm-explain", "focused-operate", "skeptical-check", "realization", "concerned-warning", "confident-conclusion", "playful-deadpan"]
+        },
+        "intensity": {"enum": ["subtle", "balanced", "strong"]},
+        "gaze_target": {"type": "string", "minLength": 1, "maxLength": 80},
+        "facial_cues": {
+          "type": "array",
+          "maxItems": 2,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "head_pose": {"enum": ["neutral", "slight-tilt", "lean-in", "turn-back"]}
+      },
+      "additionalProperties": false
+    }
+  }
+}

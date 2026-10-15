@@ -1,0 +1,21 @@
+{
+  "schema_version": "image-route-map/v1",
+  "businesses": [
+    {
+      "id": "marketing_poster",
+      "display_name": "商品与营销海报",
+      "trigger_aliases": [
+        "海报",
+        "商品主图",
+        "详情图"
+      ],
+      "templates": [
+        {
+          "id": "marketing-poster-conversion-v1",
+          "status": "production",
+          "default": true
+        }
+      ]
+    }
+  ]
+}

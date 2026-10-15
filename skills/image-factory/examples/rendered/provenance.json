@@ -1,0 +1,22 @@
+[
+  {
+    "file": "product-detail.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "sha256": "42e83e94a044f8c9cc4b2c4e0c8dee5e3514dde3cf070a6946e7b8edaf149e8d",
+    "source": "host image generation, generic demonstration",
+    "visual_review": "passed"
+  },
+  {
+    "file": "product-main.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "sha256": "00a493961e3d30190956ee2a567bf9dfae187c66f9e55a1dd9df6f78b9b4c647",
+    "source": "host image generation, generic demonstration",
+    "visual_review": "passed"
+  }
+]

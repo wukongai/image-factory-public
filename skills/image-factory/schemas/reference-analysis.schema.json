@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://content-factory.local/schemas/reference-analysis.schema.json",
+  "title": "Reference Image Analysis",
+  "description": "参考图分析结果。由看图的 agent(Claude/Codex)产出,本项目 CLI 只消费不生成。只允许沉淀可迁移的结构与风格规则,严禁记录可直接复刻的品牌资产。",
+  "type": "object",
+  "anyOf": [
+    { "required": ["layout_prompt"] },
+    { "required": ["style_prompt"] },
+    { "required": ["notes"] }
+  ],
+  "properties": {
+    "source_image": {
+      "type": "string",
+      "description": "参考图来源标识(路径或一句话描述),只做追踪,不会进入 prompt 的指令部分"
+    },
+    "layout_prompt": {
+      "type": "string",
+      "description": "可迁移的构图与信息层级描述: 视觉分区、阅读动线、留白比例"
+    },
+    "style_prompt": {
+      "type": "string",
+      "description": "可迁移的风格描述: 对比关系、配色策略、质感、节奏"
+    },
+    "copy_prompt": {
+      "type": "string",
+      "description": "可迁移的文案策略: 句式长短、动词强度、利益点位置;不是原文案本身"
+    },
+    "reusable_rules": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "明确允许复用的规则清单"
+    },
+    "forbidden_to_copy": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "明确禁止复刻的内容: logo、完整文案、人物肖像、受保护 IP、可识别商品包装"
+    },
+    "adaptation_notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "替换成用户自己主题时的改写要点"
+    },
+    "notes": {
+      "type": "string",
+      "description": "自由备注;传 markdown 文件给 CLI 时会整体进入此字段"
+    }
+  },
+  "additionalProperties": true
+}
