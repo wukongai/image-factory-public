@@ -76,3 +76,7 @@ MIT License。通用编译模块继承自 Image Factory，商品海报发行版�
 ## 生图能力接入入口
 
 有内置生图工具就直接调用；没有则使用自带 API 脚本，以隐藏输入或环境变量接入自己的 Key。默认预览，明确执行才付费请求；支持参考图和小店回执。详见 [Agent / API 接入教程](skills/image-factory/docs/生图接入.md)。
+
+## 对外使用手册
+
+给用户分享 [布丁图片工厂简易公开版手册](https://aixiaoai.cloud/cases/cmv9zjeip001dpo4d6w4xgqgi)，内含安装命令、生图接入与模板扩展说明。整套上架流程见 [布丁小店主手册](https://aixiaoai.cloud/cases/cmv9zjvpj001epo4djz75wlj1)。本版本聚焦商品海报，可自行扩展，不包含作者完整私人工作台。
