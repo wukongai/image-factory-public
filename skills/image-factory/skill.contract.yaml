@@ -1,5 +1,5 @@
 name: image-factory
-version: 0.1.0
+version: 0.2.0
 inputs: [confirmed_product_facts, image_tasks, authorized_assets, output_directory]
 outputs: [brief, prompt, render_handoff, image, delivery_receipt]
 state: [compiled, awaiting_render, awaiting_visual_review, ready, blocked]
@@ -7,5 +7,22 @@ delegates: [host_image_tool, user_configured_image_tool, store-listing-kit]
 forbidden: [bundled_credentials, personal_identity_defaults, automatic_listing, false_render_success]
 stops: [missing_product_facts, missing_render_tool, invalid_image, conflicting_existing_file]
 approvals: [paid_generation, externally_published_content]
-scripts: [scripts/generate_image_asset.py, scripts/generate_image_batch.py, scripts/accept_image.py]
-tests: [tests/test_public.py]
+scripts: [scripts/generate_image_asset.py, scripts/generate_image_batch.py, scripts/accept_image.py, scripts/image_backend.py]
+tests: [tests/test_public.py, tests/test_backend.py]
+credential_input: [hidden_terminal_prompt, IMAGE_FACTORY_API_KEY]
+kind: composite
+providers:
+  - name: user_owned_images_api
+    classification: personal_local_byok
+    credential_sources: [env, hidden_terminal_prompt]
+    secrets_outside_skill_dir: true
+    network_allowlist: [api.openai.com]
+    custom_endpoint_policy: explicit_user_selected_https_base_url_per_invocation
+    side_effect_boundary:
+      dry_run_no_remote_side_effects: true
+      apply_requires_explicit_user_approval: true
+    redaction:
+      enabled: true
+      forbidden_output_fields: [api_key, Authorization, raw_error_body]
+    docs:
+      revoke_rotate_delete: SECURITY.md

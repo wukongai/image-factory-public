@@ -72,3 +72,7 @@ MIT License。通用编译模块继承自 Image Factory，商品海报发行版�
 ### 黑底赛博大字示例
 
 ![赛博营销海报](skills/image-factory/examples/rendered/cyber-bold-poster.png)
+
+## 生图能力接入入口
+
+有内置生图工具就直接调用；没有则使用自带 API 脚本，以隐藏输入或环境变量接入自己的 Key。默认预览，明确执行才付费请求；支持参考图和小店回执。详见 [Agent / API 接入教程](skills/image-factory/docs/生图接入.md)。

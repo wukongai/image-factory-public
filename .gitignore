@@ -8,3 +8,4 @@ outputs/
 .skill-engineering/
 *.egg-info/
 .DS_Store
+.local-backups/
